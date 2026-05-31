@@ -30,4 +30,4 @@ void vars_print(void);
 /* Xóa hết biến người dùng đặt (giữ lại pi, e, ans) */
 void vars_reset(void);
 
-#endif /* VARIABLES_H */
+#endif

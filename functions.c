@@ -8,7 +8,7 @@
    functions.c — Cài đặt các hàm toán học
 
    Kỹ thuật: Dùng chuỗi if-else để "dispatch"
-   tên hàm → hàm C tương ứng trong <math.h>
+   tên hàm -> hàm C tương ứng trong <math.h>
    ================================================ */
 
 /* Macro kiểm tra số tham số cho gọn */
@@ -96,7 +96,27 @@ int functions_call(const char *name, double *argv, int argc, double *result) {
         *result = (double)a;
         return 1;
     }
-
+    if (strcmp(name, "lcm") == 0) {
+        long long a, b, t, ga, gb;
+        NEED(2);
+        a = (long long)fabs(argv[0]);
+        b = (long long)fabs(argv[1]);
+        ga = a; gb = b;
+        while (gb) { t = gb; gb = ga % gb; ga = t; }
+        *result = (double)(a / ga * b);
+        return 1;
+    }
+    if (strcmp(name, "fact") == 0) {
+        long long n, r;
+        NEED(1);
+        n = (long long)argv[0];
+        if (n < 0) { printf("Loi: fact cua so am!\n"); return 0; }
+        if (n > 20) { printf("Loi: fact(%lld) qua lon!\n", n); return 0; }
+        r = 1;
+        while (n > 1) r*= n--;
+        *result = (double)r;
+        return 1;
+    }
     printf("Loi: Ham '%s' khong ton tai. Go 'help' de xem danh sach.\n", name);
     return 0;
 }
@@ -108,7 +128,7 @@ int functions_exists(const char *name) {
         "sqrt","cbrt","pow","exp",
         "log","log2","log10",
         "abs","ceil","floor","round",
-        "hypot","min","max","gcd",
+        "hypot","min","max","gcd","lcm","fact",
         NULL
     };
     int i;
@@ -123,5 +143,5 @@ void functions_print_list(void) {
     printf("  Can / Luy thua:   sqrt, cbrt, pow, exp\n");
     printf("  Logarithm:        log (ln), log2, log10\n");
     printf("  Lam tron:         abs, ceil, floor, round\n");
-    printf("  Tien ich:         min, max, hypot, gcd\n\n");
+    printf("  Tien ich:         min, max, hypot, gcd, lcm, fact\n\n");
 }

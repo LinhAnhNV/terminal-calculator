@@ -11,13 +11,13 @@
 #define BUFFER_SIZE 256
 
 /* ================================================
-   main.c — Điểm vào của chương trình
+   main.c - Điểm vào của chương trình
 
    Luồng xử lý mỗi lần người dùng nhập:
      input (chuỗi)
-       → Lexer  → TokenList
-       → Parser → double result
-       → In kết quả, lưu vào history & ans
+       -> Lexer  -> TokenList
+       -> Parser -> double result
+       -> In kết quả, lưu vào history & ans
    ================================================ */
 
 /* ---- Các hàm tiện ích nhập liệu (cậu tự viết) ---- */
@@ -119,6 +119,7 @@ static int xu_ly_lenh(const char *input) {
 
 /* ---- main ---- */
 int main(void) {
+    history_load("history.txt");
     char input[BUFFER_SIZE];
 
     /* Khởi tạo các module */
@@ -131,6 +132,6 @@ int main(void) {
         nhap_chuoi("> ", input, sizeof(input) - 1);
         if (!xu_ly_lenh(input)) break;
     }
-
+    history_save("history.txt");
     return 0;
 }

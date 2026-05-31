@@ -6,7 +6,7 @@
    history.c — Cài đặt lịch sử tính toán
 
    Kỹ thuật: Mảng tĩnh + biến đếm
-   → Đây là cách đơn giản nhất trước khi học
+   -> Đây là cách đơn giản nhất trước khi học
       Linked List hay Stack động
    ================================================ */
 
@@ -68,4 +68,29 @@ void history_clear(void) {
 
 int history_count(void) {
     return count;
+}
+
+void history_save(const char *filename) {
+    FILE *f = fopen(filename, "w");
+    if (!f) {
+        printf("Error: Could not open file %s for writing\n", filename);
+        return;
+    }
+    int i;
+    for (i = 0; i < count; i++)
+        fprintf(f,"%s|%g\n", entries[i].expr, entries[i].result);
+    fclose(f);
+}
+
+void history_load(const char *filename) {
+    FILE *f = fopen(filename, "r");
+    if (!f) return;
+    char buffer[MAX_EXPR_LEN + 32];
+    while (fgets(buffer, sizeof(buffer), f)) {
+        char expr[MAX_EXPR_LEN];
+        double result;
+        if (sscanf(buffer, "%[^|]|%lf", expr, &result) == 2)
+            history_add(expr, result);
+    }
+    fclose(f);
 }

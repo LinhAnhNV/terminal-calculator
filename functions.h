@@ -19,4 +19,4 @@ int functions_exists(const char *name);
 /* In danh sách hàm ra màn hình */
 void functions_print_list(void);
 
-#endif /* FUNCTIONS_H */
+#endif

@@ -29,7 +29,7 @@ int lexer_tokenize(const char *src, TokenList *out) {
             (src[pos] == '.' && pos+1 < len && isdigit((unsigned char)src[pos+1])))
         {
             char  *end;
-            double val = strtod(src + pos, &end);   /* Hàm C chuẩn đọc số thực */
+            double val = strtod(src + pos, &end);   /* Đọc số thực */
             out->tokens[count].type    = TOK_NUMBER;
             out->tokens[count].num_val = val;
             pos += (int)(end - (src + pos));         /* Nhảy qua phần số vừa đọc */

@@ -35,4 +35,4 @@ void parser_init(Parser *p, const TokenList *tl);
    Trả về kết quả, ghi lỗi vào p->err */
 double parser_eval(Parser *p);
 
-#endif /* PARSER_H */
+#endif

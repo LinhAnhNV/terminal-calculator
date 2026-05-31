@@ -51,4 +51,4 @@ int lexer_tokenize(const char *src, TokenList *out);
 /* Debug: in danh sách token ra màn hình */
 void lexer_print(const TokenList *tl);
 
-#endif /* LEXER_H */
+#endif
